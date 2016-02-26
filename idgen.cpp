@@ -153,6 +153,7 @@ BOOST_AUTO_TEST_CASE(IdGeneratorSparseTest)
         for (int i = 0; i < kTotalTestIds; ++i) {
             std::unique_lock<std::mutex> lock_guard(lock);
             q.push(gen.next());
+	    lock_guard.unlock();
             cond.notify_one();
         }
     });
